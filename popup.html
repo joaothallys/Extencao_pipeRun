@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerarador de Cobrança</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div id="modal02" class="modal02">
+        <h1>Gerar Cobrança</h1>
+
+        <label for="email">Adicione um email:</label>
+        <input type="text" id="email" placeholder="Digite seu email"><br><br>
+
+        <label for="dataInicio">Data de Início:</label>
+        <input type="date" id="dataInicio"><br><br>
+
+        <label for="dataFim">Data de Fim:</label>
+        <input type="date" id="dataFim"><br><br>
+
+        <label for="campo1">Caso verdadeiro, a ura irá subir após o disparo:</label>
+        <select id="campo1" name="campo1">
+            <option value="true">Verdadeiro</option>
+            <option value="false">Falso</option>
+        </select><br><br><br><br>
+
+        <label for="campo2">Caso tenha dois telefones iguais na lista, será disparado apenas para um:</label>
+        <select id="campo2" name="campo2">
+            <option value="true">Verdadeiro</option>
+            <option value="false">Falso</option>
+        </select><br><br><br><br>
+
+        <label for="campo3">Caso falso não irá criar tag no contato:</label>
+        <select id="campo3" name="campo3">
+            <option value="true">Verdadeiro</option>
+            <option value="false">Falso</option>
+        </select><br><br><br><br>
+
+        <button id="listarEmpresasBtn"><i class="fas fa-list"></i> Listar Empresas</button>
+        <ul id="listaEmpresas"></ul>
+
+        <button id="addContactBtn">Enviar Campanha</button>
+        <div id="successMessage" class="message success">Solicitação enviada com sucesso!</div>
+        <div id="errorMessage" class="message error">Erro ao enviar solicitação!</div>
+        <div id="errorMessage2" class="message error"></div>
+        <div id="errorMessageCSV" class="message error">Etique sem contato atribuido</div>
+    </div>
+    <script type="module" src="/popup.js"></script>
+</body>
+</html>
