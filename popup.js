@@ -1,6 +1,6 @@
-//const apiUrl = `https://api.superlogica.net/v2/financeiro/cobranca?&dtInicio=${formattedDataInicio}&dtFim=${formattedDataFim}&status=pendentes`;
-const apiUrl = `https://api.superlogica.net/v2/financeiro/cobranca?&dtInicio=05/06/2024&dtFim=05/06/2024&status=pendentes`;
-//let apiUrl;
+
+//const apiUrl = `https://api.superlogica.net/v2/financeiro/cobranca?&dtInicio=05/20/2024&dtFim=05/20/2024&status=pendentes`;
+let url_sp;
 const secret = 'cac596a0-f0e2-424e-89ff-8601836c5ced';
 const access_token = '30a5fec1-1768-4d2d-b0d2-e6efba31df72';
 const app_token = 'b6620bde-d553-4fc7-a9a8-4ba32de14d23';
@@ -10,12 +10,13 @@ const fetchCobrancas = async () => {
     const dataInicioInput = document.getElementById('dataInicio');
     const dataFimInput = document.getElementById('dataFim');
 
-    const dataInicio = new Date(dataInicioInput.value);
-    const dataFim = new Date(dataFimInput.value);
+    const dataInicio = dataInicioInput.value;
+    const dataFim = dataFimInput.value;
 
-    const formattedDataInicio = formatDateMMDDYYYY(dataInicio);
-    const formattedDataFim = formatDateMMDDYYYY(dataFim);
-    
+
+    const apiUrl = `https://api.superlogica.net/v2/financeiro/cobranca?&dtInicio=${dataInicio}&dtFim=${dataFim}&status=pendentes`;
+
+    //url_sp = apiUrl;
 
     try {
         const response = await fetch(apiUrl, {
@@ -41,6 +42,12 @@ const fetchCobrancas = async () => {
 };
 
 
+function formatDateMMDDYYYY(date) {
+    const mm = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    const dd = String(date.getDate()).padStart(2, '0');
+    const yyyy = date.getFullYear();
+    return `${mm}/${dd}/${yyyy}`;
+}
 
 
 function formatDateDDMMYYYY(date) {
@@ -51,21 +58,20 @@ function formatDateDDMMYYYY(date) {
     return `${day}/${month}/${year}`;
 }
 
-function formatDateMMDDYYYY(date) {
-    const mm = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
-    const dd = String(date.getDate()).padStart(2, '0');
-    const yyyy = date.getFullYear();
-    return `${mm}/${dd}/${yyyy}`;
-}
-
 
 // Função para formatar a data no padrão "m/d/Y"
-function formatDate(date) {
+function formatDate(dateString) {
+    const date = new Date(dateString);
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const year = date.getFullYear();
 
-    return `${month}/${day}/${year}`;
+    // Adiciona zero à esquerda para garantir dois dígitos para dia e mês
+    const formattedMonth = month < 10 ? `0${month}` : month;
+    const formattedDay = day < 10 ? `0${day}` : day;
+
+    return `${formattedDay}/${formattedMonth}/${year}`;
+    
 }
 
 async function createCSVFile() {
@@ -115,8 +121,25 @@ async function createCSVFile() {
     }
 }
 
+document.getElementById('listarEmpresasBtn').addEventListener('click', async () => {
+    try {
+        const empresas = await listarEmpresas();
+        exibirEmpresas(empresas);
+    } catch (error) {
+        console.error('Erro ao listar empresas:', error);
+    }
+});
 
-async function listarEmpresas() {
+const listarEmpresas = async () => {
+    const dataInicioInput = document.getElementById('dataInicio');
+    const dataFimInput = document.getElementById('dataFim');
+
+    const dataInicio = dataInicioInput.value;
+    const dataFim = dataFimInput.value;
+
+
+    const apiUrl = `https://api.superlogica.net/v2/financeiro/cobranca?&dtInicio=${dataInicio}&dtFim=${dataFim}&status=pendentes`;
+
     try {
         const response = await fetch(apiUrl, {
             method: 'GET',
@@ -127,26 +150,20 @@ async function listarEmpresas() {
                 'app_token': app_token
             }
         });
+
         if (!response.ok) {
             throw new Error('Erro ao obter empresas');
         }
+
         const data = await response.json();
         return data; // Retorna os nomes das empresas
     } catch (error) {
         console.error('Erro ao listar empresas:', error);
         throw error;
     }
-}
+};
 
 
-document.getElementById('listarEmpresasBtn').addEventListener('click', async () => {
-    try {
-        const empresas = await listarEmpresas();
-        exibirEmpresas(empresas);
-    } catch (error) {
-        console.error('Erro ao listar empresas:', error);
-    }
-});
 
 function exibirEmpresas(empresas) {
     const listaEmpresas = document.getElementById('listaEmpresas');
@@ -176,7 +193,7 @@ const token2 = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjA3MzVkZDI0NWNhOTU0
 const sendCSVFile = async () => {
 
     try {
-        
+
         addContactBtn.classList.add('loading');
         addContactBtn.disabled = true
         const cobrancas = await fetchCobrancas(fetchCobrancas);
@@ -195,7 +212,7 @@ const sendCSVFile = async () => {
         //const send_text = document.getElementById('mensagem').value;
         const email = document.getElementById('email').value;
 
-        const entry_msg = `Sua fatura ChatsHub já se encontra disponível para pagamento!\n\n Link do boleto: \n[custom]`;
+        const entry_msg = `*Mensagem Automática*\n\nOlá prezado(a) cliente, para sua comodidade, deixaremos o link do seu boleto abaixo:\n\n[custom]`;
 
 
         const formData = new FormData();
