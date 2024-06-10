@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,14 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
+
 <body>
     <div id="modal02" class="modal02">
-        <h1>Gerar Cobrança</h1>
+        <h1>Gerar Campanha</h1>
+
+        <label for="mensagem">Mensagem Personalizada:</label>
+        <textarea id="mensagem" placeholder="Digite sua mensagem"></textarea><label for="mensagem">O [custom] aqui será
+            o link do boleto do cliente</label><br><br>
 
         <label for="email">Adicione um email:</label>
         <input type="text" id="email" placeholder="Digite seu email"><br><br>
@@ -50,4 +56,5 @@
     </div>
     <script type="module" src="/popup.js"></script>
 </body>
+
 </html>
