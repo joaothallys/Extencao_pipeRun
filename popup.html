@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Oportunidade</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="popup.js"></script>
+</head>
+<body>
+    <div id="modal02" class="modal02">
+        <h4>Cadastrar Nova Oportunidade</h4>
+        <label for="title">Título:</label>
+        <input type="text" id="title" />
+        
+        <label for="company">Empresa:</label>
+        <input type="text" id="companySearch" placeholder="Pesquisar..." />
+        <ul id="companyList" class="dropdown"></ul>
+        
+        <!-- Campos customizados com pesquisa -->
+        <label for="canal">Canal do Chamado:</label>
+        <input type="text" id="canalSearch" placeholder="Pesquisar..." />
+        <ul id="canalList" class="dropdown"></ul>
+        
+        <label for="categoria">Categoria do Chamado:</label>
+        <input type="text" id="categoriaSearch" placeholder="Pesquisar..." />
+        <ul id="categoriaList" class="dropdown"></ul>
+        
+        <label for="origem">Origem do Chamado:</label>
+        <input type="text" id="origemSearch" placeholder="Pesquisar..." />
+        <ul id="origemList" class="dropdown"></ul>
+        
+        <label for="nivel">Nível do Chamado:</label>
+        <input type="text" id="nivelSearch" placeholder="Pesquisar..." />
+        <ul id="nivelList" class="dropdown"></ul>
+        
+        <label for="motivo">Motivo do Chamado:</label>
+        <input type="text" id="motivoSearch" placeholder="Pesquisar..." />
+        <ul id="motivoList" class="dropdown"></ul>
+        
+        <label for="setor">Setor do Chamado:</label>
+        <input type="text" id="setorSearch" placeholder="Pesquisar..." />
+        <ul id="setorList" class="dropdown"></ul>
+        
+        <label for="submotivo">Submotivo do Chamado:</label>
+        <input type="text" id="submotivoSearch" placeholder="Pesquisar..." />
+        <ul id="submotivoList" class="dropdown"></ul>
+
+        <button id="addOpportunityBtn">Cadastrar Oportunidade</button>
+        <div id="successMessage" style="display: none; color: green;">Oportunidade cadastrada com sucesso!</div>
+        <div id="errorMessage" style="display: none; color: red;">Erro ao cadastrar a oportunidade!</div>
+    </div>
+</body>
+</html>

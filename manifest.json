@@ -1,0 +1,32 @@
+{
+    "manifest_version": 3,
+    "name": "Cadastrar oportunidade",
+    "version": "1.0.2",
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "css": [
+                "style.css"
+            ],
+            "js": [
+                "popup.js"
+            ]
+        }
+    ],
+    "icons": {
+        "48": "/pipe48.png"
+    }
+}
