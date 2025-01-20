@@ -1,4 +1,4 @@
-const token = 'ba94d237eaa75e26e054fce7d05909ec';
+const token = 'SEU_TOKEN_AQUI';
 
 const customFieldValues = {
     canal: [],
